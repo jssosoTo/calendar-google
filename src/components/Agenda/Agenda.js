@@ -67,13 +67,9 @@ const Wrapper = styled.section`
         height: 8px;
         background-color: transparent;
     }
-    /*定义滚动条轨道
-    内阴影+圆角*/
     .agenda-lists-container::-webkit-scrollbar-track {
         background-color: transparent;
     }
-    /*定义滑块
-    内阴影+圆角*/
     .agenda-lists-container::-webkit-scrollbar-thumb {
         border-radius:10px;
         background-color: rgb(220, 220, 220);
@@ -94,10 +90,8 @@ const Wrapper = styled.section`
     }
     .date-container {
         display: flex;
-        /* align-items: center; */
         width: 8rem;
         margin-left: 1rem;
-        /* background-color: lightblue; */
     }
     .date-day {
         cursor: pointer;
@@ -121,7 +115,6 @@ const Wrapper = styled.section`
     .date-week {
         font-size: 12px;
         color: gray;
-        /* font-weight: normal; */
     }
     .lists-container {
         flex: 1;

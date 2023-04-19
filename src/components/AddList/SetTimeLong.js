@@ -54,10 +54,6 @@ const Wrapper = styled.section`
         height: 3.5rem;
         padding: .5rem .5rem;
     }
-    /* .set-time-container:hover {
-        border-radius: 5px;
-        background-color: rgba(0, 0, 0, .1);
-    } */
     .set-time-container .date-clock-container {
         height: 100%;
         display: flex;

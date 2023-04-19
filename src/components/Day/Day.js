@@ -94,13 +94,9 @@ const Wrapper = styled.section`
         height: 8px;
         background-color: transparent;
     }
-    /*定义滚动条轨道
-    内阴影+圆角*/
     .show-time-container::-webkit-scrollbar-track {
         background-color: transparent;
     }
-    /*定义滑块
-    内阴影+圆角*/
     .show-time-container::-webkit-scrollbar-thumb {
         border-radius:10px;
         background-color: rgb(220, 220, 220);
