@@ -38,17 +38,15 @@ function App() {
               }, 5000);
 
               notification.onclick = function () {
-                notification.close();//关闭桌面通知
+                notification.close();
                 const href = document.location.href;
-                window.close();//将当前页面关闭
-                window.open(`${href}agenda`);//新开一个页面，url为当前页面
+                window.close();
+                window.open(`${href}agenda`);
               };
               navigator.onerror = function () {
-                //当有错误发生时会onerror函数会被调用
                 console.log('桌面通知发生了错误');
               };
               navigator.onshow = function () {
-                //消息框显示时会被调用
                 console.log('桌面通知显示ing');
               };
             } else if (permission === 'denied') {

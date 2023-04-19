@@ -46,26 +46,6 @@ const reducer = (state, action) => {
                 [action.payload.month - 1] : {month: action.payload.month, days: daysArr},
             }
         };
-        /* if (state.months.some(item => item.month === action.payload.month)) {
-            const newMonths = state.months.map((item) => {
-                if (item.month === action.payload.month) {
-                    return {...item, days: daysArr};
-                }
-                return item;
-            });
-            return {...state, months: newMonths};
-        } */
-
-        /* return {
-            ...state,
-            months: [
-                ...state.months, 
-                {
-                    month: date.getMonth() + 1,
-                    days: daysArr
-                }
-            ]
-        } */
     }
     if (action.type === 'SWITCH_NEXT_YEAR') {
         return {
@@ -180,7 +160,6 @@ const reducer = (state, action) => {
     }
     if (action.type === 'SET_QUERY_DATE') {
         const weekDay = new Date(action.payload.year, action.payload.month - 1, action.payload.day).getDay();
-        console.log(`年：${action.payload.year} 月：${action.payload.month} 日：${action.payload.day} 星期: ${weekDay}`);
         return {
             ...state,
             clickQueryDate: {
@@ -231,22 +210,6 @@ const reducer = (state, action) => {
             lists: openDetailList
         }
     }
-    /* if (action.type === 'SWITCH_DETAIL_CARD') {
-        const openDetailList = state.lists.map(item => {
-            if (item.id === action.payload) {
-                return {
-                    ...item,
-                    isDetailOpen: false
-                }
-            }
-            return item;
-        });
-        localStorage.setItem('list', JSON.stringify(openDetailList));
-        return {
-            ...state,
-            lists: openDetailList
-        }
-    } */
     if (action.type === 'CLOSE_DETAIL_CARD') {
         const openDetailList = state.lists.map(item => {
             return {

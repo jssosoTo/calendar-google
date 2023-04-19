@@ -37,18 +37,9 @@ const initialState = {
     },
     isListHiding: true,
     listModalPosition: {top: '0px', left: '0px'},
-    /* lists: [
-        {id: 1, year: 2023, month: 3, day: 29, time: '17:00', content: 'Typing Code', type: 'task'},
-        {id: 2, year: 2023, month: 3, day: 29, time: '18:00', content: 'Watching TV', type: 'task'},
-        {id: 3, year: 2023, month: 3, day: 30, time: '17:00', content: 'Typing Code', type: 'remind'},
-    ] */
     lists: listStorage,
     listID: null,
     editList: {},
-    /* currentYearDates: {
-        year: 2002,
-        months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    } */
     filters: filterStorage,
     searchKey: '',
     timer: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
@@ -176,7 +167,6 @@ const AppProvider = ({children}) => {
     };
     const handleQuery = (e) => {
         const selectElPosition = e.target.closest('.day').getBoundingClientRect();
-        console.log(selectElPosition);
         dispatch({type: 'SWITCH_LIST_SHOW', payload: {top: selectElPosition.top, left: selectElPosition.left}});
     };
     const handleCloseQueryModal = () => {
