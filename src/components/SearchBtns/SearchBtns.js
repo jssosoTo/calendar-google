@@ -5,7 +5,7 @@ import { useGlobalContext } from '../../Providers/AppProvider';
 
 const SearchBtns = ({isSideCardShow, setIsSideCardShow}) => {
     const [isHiding, setIsHiding] = useState(false);
-    const {switchTaskCard, switchRemindCard, switchActivityCard, isTaskCardOpen, isRemindCardOpen, isActivityCardOpen} = useGlobalContext();
+    const {switchTaskCard, switchRemindCard, switchActivityCard, switchMapCard, isTaskCardOpen, isRemindCardOpen, isActivityCardOpen, isMapCardOpen} = useGlobalContext();
     const btnContainer = useRef(null);
     const sideBtnsContainer = useRef(null);
 
@@ -21,11 +21,13 @@ const SearchBtns = ({isSideCardShow, setIsSideCardShow}) => {
         }
     };
     const switchSidebarCard = (type) => {
-        if (type === 'remind' && (isTaskCardOpen || isActivityCardOpen)) {
+        if (type === 'remind' && (isTaskCardOpen || isActivityCardOpen || isMapCardOpen)) {
             setIsSideCardShow(true);
-        } else if (type === 'task' && (isRemindCardOpen || isActivityCardOpen)) {
+        } else if (type === 'task' && (isRemindCardOpen || isActivityCardOpen || isMapCardOpen)) {
             setIsSideCardShow(true);
-        } else if (type === 'activity' && (isRemindCardOpen || isTaskCardOpen)) {
+        } else if (type === 'map' && (isRemindCardOpen || isTaskCardOpen || isActivityCardOpen)) {
+            setIsSideCardShow(true);
+        } else if (type === 'activity' && (isRemindCardOpen || isTaskCardOpen || isMapCardOpen)) {
             setIsSideCardShow(true);
         } else {
             setIsSideCardShow(!isSideCardShow);
@@ -90,7 +92,13 @@ const SearchBtns = ({isSideCardShow, setIsSideCardShow}) => {
                             />
                             </div>
                         </div>
-                        <div className='icon'>
+                        <div 
+                            className={`icon ${isMapCardOpen && 'show-light-blue'}`}
+                            onClick={() => {
+                                switchSidebarCard('map');
+                                switchMapCard();
+                            }}
+                        >
                             <div>
 
                             <div 

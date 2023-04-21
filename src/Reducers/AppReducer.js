@@ -188,7 +188,7 @@ const reducer = (state, action) => {
         localStorage.setItem('list', JSON.stringify(newList));
         return {
             ...state,
-            lists: newList
+            lists: newList,
         }
     }
     if (action.type === 'SWITCH_DETAIL_CARD') {
@@ -459,6 +459,14 @@ const reducer = (state, action) => {
         return {
             ...state,
             binList: action.payload
+        }
+    }
+    if (action.type === 'ADD_SEARCH_LIST') {
+        const newList = [...state.mapList, action.payload];
+        localStorage.setItem('map', JSON.stringify(newList));
+        return {
+            ...state,
+            mapList: newList
         }
     }
 

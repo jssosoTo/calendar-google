@@ -1,15 +1,45 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components';
 import { BsPinFill, BsTrashFill } from 'react-icons/bs';
 import { MdModeEdit } from 'react-icons/md';
 import { useGlobalContext } from '../../../Providers/AppProvider';
 
-const RemindList = ({id, content, time, year, month, day, position}) => {
+const RemindList = ({id, content, time, year, month, day, position, listAmount, switchPosition, isMoveList, setIsMoveList}) => {
     const { deleteList, openEditList } = useGlobalContext();
+    const divContainer = useRef(null);
+
+    const handleContainer = (e) => {
+        setIsMoveList(true);
+        divContainer.current.style.zIndex = 9999;
+        const cardPosition = divContainer.current.getBoundingClientRect();
+        const mouseTopDistance = e.clientY - cardPosition.top;
+        function move(e) {
+            divContainer.current.style.top = `calc(${e.clientY}px - 4rem - ${mouseTopDistance}px)`;
+        }
+        function changePosition(e) {
+            // const wholeListLength = (listAmount * 4.5 + .7 * (listAmount + 1)) * 16;
+            const singleListLength = (4.5 + .7) * 16;
+            const onWhichList = Math.trunc((e.clientY - 4 * 16 - mouseTopDistance) / singleListLength);
+            switchPosition(onWhichList, position);
+            divContainer.current.style.zIndex = 1;
+            divContainer.current.style.top = `${position * 4.5 + .7 * (position + 1)}rem`;
+            divContainer.current.removeEventListener('mousemove', move);
+        }
+        divContainer.current.addEventListener('mousemove', move);
+        divContainer.current.addEventListener('mouseup', changePosition);
+    };
+
+    useEffect(() => {
+        divContainer.current.style.top = `${position * 4.5 + .7 * (position + 1)}rem`;
+    }, [position])
 
     return (
-        <Wrapper style={{top: `${position * 4.5 + .7 * (position + 1)}rem`}}>
-            <div className='single-remind-list-container'>
+        <Wrapper 
+            ref={divContainer} 
+            style={{top: `${position * 4.5 + .7 * (position + 1)}rem`}}
+            onMouseDown={handleContainer}
+        >
+            <div className={`single-remind-list-container ${isMoveList && 'move-hover'}`}>
                 <h4 className='remind-title'>{content}</h4>
                 <div className='time-container'>
                     <div className='remind-date'>
@@ -32,6 +62,7 @@ const RemindList = ({id, content, time, year, month, day, position}) => {
 
 const Wrapper = styled.section`
     position: absolute;
+    z-index: 1;
     .single-remind-list-container {
         cursor: pointer;
         position: relative;
@@ -40,6 +71,11 @@ const Wrapper = styled.section`
         border-radius: 10px;
         padding: .5rem 1rem 0 1rem;
         border: 1px solid lightgray;
+        background-color: #fff;
+    }
+    .move-hover:hover {
+        border: 1px dashed gray;
+        background-color: rgba(250,250,250,.5);
     }
     .remind-title {
         font-size: 17px;

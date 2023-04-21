@@ -4,9 +4,10 @@ import Task from './Task/Task';
 import { useGlobalContext } from '../../Providers/AppProvider';
 import Remind from './Remind/Remind';
 import Activity from './Activity/Activity';
+import Map from './Map/Map';
 
 const SideCard = ({isSideCardShow, setIsSideCardShow, closeSidebar}) => {
-    const {isTaskCardOpen, isRemindCardOpen, isActivityCardOpen} = useGlobalContext();
+    const {isTaskCardOpen, isRemindCardOpen, isActivityCardOpen, isMapCardOpen} = useGlobalContext();
     const cardContainer = useRef(null);
 
     useEffect(() => {
@@ -23,6 +24,7 @@ const SideCard = ({isSideCardShow, setIsSideCardShow, closeSidebar}) => {
                 {isTaskCardOpen && <Task setIsSideCardShow={setIsSideCardShow} />}
                 {isRemindCardOpen && <Remind setIsSideCardShow={setIsSideCardShow} />}
                 {isActivityCardOpen && <Activity setIsSideCardShow={setIsSideCardShow} />}
+                {isMapCardOpen && <Map setIsSideCardShow={setIsSideCardShow} />}
             </div>
         </Wrapper>
     )

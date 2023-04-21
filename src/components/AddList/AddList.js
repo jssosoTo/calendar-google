@@ -50,7 +50,6 @@ const AddList = () => {
         const mouseTopDistance = e.clientY - cardPosition.top;
         function move(e) {
             let cardPosition = cardContainer.current.getBoundingClientRect();
-            console.log(cardPosition.left, e.clientX);
             cardContainer.current.style.left = `${e.clientX}px`;
             cardContainer.current.style.top = `calc(${e.clientY}px - 4rem - ${mouseTopDistance}px)`;
         }

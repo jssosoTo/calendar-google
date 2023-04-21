@@ -3,6 +3,7 @@ import reducer from '../Reducers/AppReducer';
 
 const listStorage = JSON.parse(localStorage.getItem('list')) || [];
 const binStorage = JSON.parse(localStorage.getItem('bin')) || [];
+const mapStorage = JSON.parse(localStorage.getItem('map')) || [];
 const SearchStorage = JSON.parse(localStorage.getItem('search')) || {
     keywords: '',
     show: false
@@ -52,7 +53,9 @@ const initialState = {
         show: false,
         isWithdraw: false
     },
-    searchContent: SearchStorage
+    searchContent: SearchStorage,
+    remindList: [],
+    mapList: mapStorage
 };
 
 
@@ -65,6 +68,7 @@ const AppProvider = ({children}) => {
     const [isTaskCardOpen, setIsTaskCardOpen] = useState(false);
     const [isRemindCardOpen, setIsRemindCardOpen] = useState(false);
     const [isActivityCardOpen, setIsActivityCardOpen] = useState(false);
+    const [isMapCardOpen, setIsMapCardOpen] = useState(false);
     const [modalMessage, setModalMessage] = useState({
         modalContent: '',
         type: '',
@@ -214,18 +218,27 @@ const AppProvider = ({children}) => {
     const switchTaskCard = () => {
         setIsRemindCardOpen(false);
         setIsActivityCardOpen(false);
+        setIsMapCardOpen(false);
         setIsTaskCardOpen(!isTaskCardOpen);
     };
     const switchRemindCard = () => {
         setIsActivityCardOpen(false);
         setIsTaskCardOpen(false);
+        setIsMapCardOpen(false);
         setIsRemindCardOpen(!isRemindCardOpen);
     };
     const switchActivityCard = () => {
         setIsTaskCardOpen(false);
         setIsRemindCardOpen(false);
+        setIsMapCardOpen(false);
         setIsActivityCardOpen(!isActivityCardOpen);
     };
+    const switchMapCard = () => {
+        setIsTaskCardOpen(false);
+        setIsRemindCardOpen(false);
+        setIsActivityCardOpen(false);
+        setIsMapCardOpen(!isMapCardOpen);
+    }
     const closeModalAlert = () => {
         setModalMessage({
             modalContent: '',
@@ -263,6 +276,9 @@ const AppProvider = ({children}) => {
     };
     const submitBinList = (lists) => {
         dispatch({type: 'SUBMIT_BIN_LIST', payload: lists});
+    };
+    const addSearchList = (text) => {
+        dispatch({type: 'ADD_SEARCH_LIST', payload: text});
     }
 
     useEffect(() => {
@@ -301,9 +317,11 @@ const AppProvider = ({children}) => {
             isActivityCardOpen,
             isRemindCardOpen,
             isTaskCardOpen,
+            isMapCardOpen,
             switchActivityCard,
             switchRemindCard,
             switchTaskCard,
+            switchMapCard,
             modalMessage,
             closeModalAlert,
             openModalAlert,
@@ -317,7 +335,8 @@ const AppProvider = ({children}) => {
             withdrawTrash,
             handleWithdraw,
             handleDelete,
-            submitBinList
+            submitBinList,
+            addSearchList
         }}>
             {children}
         </AppContext.Provider>
