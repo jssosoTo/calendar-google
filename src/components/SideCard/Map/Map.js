@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import BMap from './BMap';
 import { GrShare } from 'react-icons/gr';
 import { useGlobalContext } from '../../../Providers/AppProvider';
 import List from './List';
+// import SmallMap from './SmallMap';
 
 const MapContainer = ({setIsSideCardShow}) => {
     const { switchMapCard, mapList, addSearchList } = useGlobalContext();
@@ -38,7 +38,7 @@ const MapContainer = ({setIsSideCardShow}) => {
                 </div>
                 <div className='whole-lists-container'>
                     <div className='map-container' id="container">
-                        <BMap addSearchList={addSearchList} />
+                        {/* <SmallMap addSearchList={addSearchList} /> */}
                     </div>
                     <div className='nearly-search'>
                         <h2 className='title'>最近搜索</h2>

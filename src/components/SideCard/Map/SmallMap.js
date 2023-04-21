@@ -2,7 +2,7 @@ import React, { createRef, useEffect, useRef, useState } from 'react';
 import {Map, Marker, NavigationControl, InfoWindow, Autocomplete} from 'react-bmap';
 import styled from 'styled-components';
 
-const BMap = ({addSearchList}) => {
+const SmallMap = ({addSearchList}) => {
     const [lngValue, setLngValue] = useState(116.404449);
     const [latValue, setLatValue] = useState(39.914889);
 
@@ -62,4 +62,4 @@ const Wrapper = styled.section`
     }
 `;
 
-export default BMap;
+export default SmallMap
