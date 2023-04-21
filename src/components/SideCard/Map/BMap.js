@@ -1,7 +1,6 @@
 import React, { createRef, useEffect, useRef, useState } from 'react';
 import {Map, Marker, NavigationControl, InfoWindow, Autocomplete} from 'react-bmap';
 import styled from 'styled-components';
-// import {Map, Marker, NavigationControl, InfoWindow} from 'react-bmapgl';
 
 const BMap = ({addSearchList}) => {
     const [lngValue, setLngValue] = useState(116.404449);
